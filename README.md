@@ -1,5 +1,4 @@
-## Next.js App Router Course - Starter
+## Tugas Pertama JIDA 2025- Muhammad Asfa Devano
 
-This is the starter template for the Next.js App Router Course. It contains the starting code for the dashboard application.
-
-For more information, see the [course curriculum](https://nextjs.org/learn) on the Next.js Website.
+ini adalah pengumpulan tugas pertemuan pertama pada Fase 2 JIDA 2025
+yaitu menginstal sebuah project next.js dan memastikan project-nya berjalan dengan baik.
