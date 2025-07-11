@@ -29,7 +29,7 @@ const navLinks = [
 },
 {
     name: 'Not Found',
-    href: '/dashboard/not-found',
+    href: '/awkawkawk',
     icon: InformationCircleIcon,
 },
 ];

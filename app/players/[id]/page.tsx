@@ -2,48 +2,19 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-
-// Data pemain
-const players = [
-  {
-    id: '1',
-    name: 'David da Silva',
-    image: '/player/dds.jpg',
-    position: 'Striker',
-    bio: 'David da Silva adalah penyerang tajam asal Brasil yang menjadi andalan Persib Bandung.',
-  },
-  {
-    id: '2',
-    name: 'Marc Klok',
-    image: '/player/klok.jpg',
-    position: 'Midfielder',
-    bio: 'Marc Klok adalah gelandang kreatif yang punya visi bermain luar biasa.',
-  },
-  {
-    id: '3',
-    name: 'Beckham Putra',
-    image: '/player/beckam.jpg',
-    position: 'Winger',
-    bio: 'Beckham Putra Nugraha adalah pemain muda berbakat Persib dengan kecepatan luar biasa.',
-  },
-  {
-    id: '4',
-    name: 'Nick Kuipers',
-    image: '/player/nickkuiperss.jpg',
-    position: 'Defender',
-    bio: 'Nick Kuipers adalah bek tangguh asal Belanda yang memperkuat lini belakang Persib.',
-  },
-];
+import { use } from 'react';
+import { players } from '@/components/playerData';
 
 type Props = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export default function PlayerDetailPage({ params }: Props) {
   const router = useRouter();
-  const player = players.find((p) => p.id === params.id);
+  const { id } = use(params);
+  const player = players.find((p) => p.id === id);
 
   if (!player) {
     return <div className="p-10 text-center text-red-500">Pemain tidak ditemukan.</div>;
