@@ -5,6 +5,7 @@ import {
     PhotoIcon,
     PhoneIcon,
     InformationCircleIcon,
+    ShoppingBagIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -23,9 +24,9 @@ const navLinks = [
     icon: PhotoIcon,
 },
 {
-    name: 'Contact',
-    href: '/dashboard/contact',
-    icon: PhoneIcon,
+    name: 'Product',
+    href: '/products',
+    icon: ShoppingBagIcon,
 },
 {
     name: 'Not Found',
