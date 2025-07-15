@@ -6,3 +6,6 @@ yaitu menginstal sebuah project next.js dan memastikan project-nya berjalan deng
 
 ## Tugas Kedua JIDA 2025 - Muhammad Asfa Devano
 saya tela menambhakan beberapa fitur seperti yang ada di tugas, yaitu membuat beberapa halaman, lalu membuat  halaman 404 not found, membuat dynamic route, dan juga membuat navigasi agar bisa bepindah pindah halaman sesuai kemauan kita.
+
+## Tugas Ketiga JIDA 2025 - Muhammad Asfa Devano
+tugas pertemuan ke 4 - Membuat endpoint API di API/products dan membuat halama /products dengan fitur CRUD
