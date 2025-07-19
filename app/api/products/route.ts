@@ -1,23 +1,28 @@
-// app/api/products/route.ts
-import { NextResponse } from 'next/server'
-import { products } from '@/data/productData'
+import { PrismaClient } from '@/generated/prisma';
+import { NextResponse } from 'next/server';
+import { Prisma } from '@/generated/prisma'; // pastikan ini benar
 
-// GET: Mengambil semua produk
+const prisma = new PrismaClient();
+
 export async function GET() {
-  return NextResponse.json(products)
+  const products = await prisma.product.findMany({
+    orderBy: { id: 'desc' }
+  });
+  return NextResponse.json(products);
 }
 
-// POST: Menambahkan produk baru
-export async function POST(request: Request) {
-  const { name, price } = await request.json()
 
-  const newProduct = {
-    id: crypto.randomUUID(),
-    name,
-    price,
-  }
+export async function POST(req: Request) {
+  const body = await req.json();
 
-  products.push(newProduct)
+  const { name, price } = body;
 
-  return NextResponse.json(newProduct, { status: 201 })
+  const newProduct = await prisma.product.create({
+    data: {
+      name,
+      price,
+    },
+  });
+
+  return NextResponse.json(newProduct);
 }

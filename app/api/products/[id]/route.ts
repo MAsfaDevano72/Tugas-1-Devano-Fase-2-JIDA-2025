@@ -1,50 +1,29 @@
-// app/api/products/[id]/route.ts
-import { NextResponse } from 'next/server'
-import { products } from '@/data/productData'
+import { PrismaClient } from '@/generated/prisma';
+import { NextResponse } from 'next/server';
 
-function extractIdFromUrl(url: string): string {
-  const parts = url.split('/')
-  return parts[parts.length - 1] // ambil bagian terakhir dari path sebagai id
+const prisma = new PrismaClient();
+
+export async function PUT(req: Request, { params }: { params: { id: string } }) {
+  const id = parseInt(params.id);
+  const body = await req.json();
+
+  const updated = await prisma.product.update({
+    where: { id },
+    data: {
+      name: body.name,
+      price: body.price,
+    },
+  });
+
+  return NextResponse.json(updated);
 }
 
-export async function GET(request: Request) {
-  const id = extractIdFromUrl(request.url)
-  const product = products.find((p) => p.id === id)
+export async function DELETE(_: Request, { params }: { params: { id: string } }) {
+  const id = parseInt(params.id);
 
-  if (!product) {
-    return NextResponse.json({ error: 'Product not found' }, { status: 404 })
-  }
+  const deleted = await prisma.product.delete({
+    where: { id },
+  });
 
-  return NextResponse.json(product)
-}
-
-export async function PUT(request: Request) {
-  const id = extractIdFromUrl(request.url)
-  const { name, price } = await request.json()
-  const index = products.findIndex((p) => p.id === id)
-
-  if (index === -1) {
-    return NextResponse.json({ error: 'Product not found' }, { status: 404 })
-  }
-
-  products[index] = {
-    ...products[index],
-    name: name ?? products[index].name,
-    price: price ?? products[index].price,
-  }
-
-  return NextResponse.json(products[index])
-}
-
-export async function DELETE(request: Request) {
-  const id = extractIdFromUrl(request.url)
-  const index = products.findIndex((p) => p.id === id)
-
-  if (index === -1) {
-    return NextResponse.json({ error: 'Product not found' }, { status: 404 })
-  }
-
-  const deleted = products.splice(index, 1)
-
-  return NextResponse.json({ deleted: deleted[0] })
+  return NextResponse.json(deleted);
 }
